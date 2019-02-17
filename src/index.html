@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <!--
       On ne veut pas que les moteurs de recherche indexent cette page
@@ -18,7 +18,9 @@
   </head>
   <body class="flat">
     <div class="se-pre-con" style="position:fixed;left: 0px;top: 0px;width: 100%;height: 100%;z-index: 9999;background: url(assets/img/Preloader_3.gif) center no-repeat #fff;"></div>
-  		<h1>Sudoku</h1>
+<h1>Sudoku</h1>
+    <div class="wrap-container">
+
       <!-- <div class="modale" >
         <span class="message">Veuillez choisir un niveau pour commencer une nouvelle partie.</span>
       </div> -->
@@ -30,10 +32,17 @@
       </div>
       <div id="menu" class="sudoku-menu">
         <div class="levels">
-          <p>Nouvelle grille - choisir le niveau de difficulté</p>
-          <button id="create-easy" class="easy active">Facile</button>
-          <button id="create-medium" class="medium">Moyen</button>
-          <button id="create-hard" class="difficult">Difficile</button>
+          <p>Choisir le niveau de difficulté</p>
+          <div class="options-game">
+            <button id="help"  alt="Comment jouer"><span>Aide</span> </button>
+            <button type="button" name="button" id="new-game">Nouvelle partie</button>
+            <div class="levels-options">
+              <button id="create-easy" class="level easy">Facile</button>
+              <button id="create-medium" class="level medium">Moyen</button>
+              <button id="create-hard" class="level difficult">Difficile</button>
+              <button id="no-new-level" class="level">Annuler</button>
+            </div>
+          </div>
         </div>
         <!-- <div class="">
           <button id="solve">Résoudre</button>
@@ -41,12 +50,7 @@
     			<button id="validate">Valider</button>
     			<button id="showM">Show Matrices</button>
         </div> -->
-        <div id="tools" >
-          <button id="restartGrid" disabled alt="Refaire cette grille"><span>Recommencer</span> </button>
-          <button id="showSolution" disabled alt="Montrer la solution"><span>Montrer la solution</span> </button>
-          <button id="help"  alt="Comment jouer"><span>Aide</span> </button>
-          <!-- <button id="showM">Show Matrices</button> -->
-        </div>
+
   		</div>
   		<div id="container"></div>
       <div class="wheel">
@@ -63,27 +67,24 @@
           <button class="wheel-btn" id="num-0">X</button>
         </div>
       </div>
-      <div class="switch-container flex-center">
-        <!-- <div class="can-toggle">
-          <input id="notes" type="checkbox">
-          <label for="notes">
-            <div class="can-toggle__label-text">Notes</div>
-            <div class="can-toggle__switch"  data-checked="Actif" data-unchecked="Inactif"></div>
-          </label>
-        </div> -->
-        <span>NOTES</span>
+      <div id="tools" >
+        <button id="restartGrid" disabled alt="Refaire cette grille"><span>Recommencer la grille</span> </button>
+        <button id="showSolution" disabled alt="Montrer la solution"><span>Montrer la solution</span> </button>
+        <!-- <button id="help"  alt="Comment jouer"><span>Aide</span> </button> -->
+        <!-- <button id="showM">Show Matrices</button> -->
 
-        <div class="onoffswitch">
-      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" >
-      <label class="onoffswitch-label" for="myonoffswitch">
-          <span class="onoffswitch-inner"></span>
-          <span class="onoffswitch-switch"></span>
-      </label>
-  </div>
-
-
-
+        <div class="switch-container ">
+          <span class="titre">NOTES</span>
+          <div class="onoffswitch">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" >
+            <label class="onoffswitch-label" for="myonoffswitch">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+            </label>
+          </div>
+        </div>
       </div>
+    </div>
       <!-- Les scripts seront ajoutés ici par Webpack -->
-    </body>
+  </body>
 </html>

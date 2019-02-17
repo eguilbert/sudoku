@@ -103,7 +103,7 @@ var Sudoku = ( function ( $ ){
         CustomAnalytics.record("play");
         started = true;
         _game.toggleModale(0);
-        $(".sudoku-menu button").attr("disabled", false);
+        $("#tools button").attr("disabled", false);
         _game.resetHideCases();
         $('.levels button').removeClass('active');
         if(levelChosen===0){
@@ -120,7 +120,7 @@ var Sudoku = ( function ( $ ){
           level = "hard";
         }
         $('.levels #create-' + level ).addClass('active');
-
+        $('#new-game').removeClass().addClass('mode-' + level)
         this.reset();
         this.solve();
         this.solve();
@@ -229,6 +229,7 @@ var Sudoku = ( function ( $ ){
               result = JSON.stringify('<span class="big fail">Dommage.</span><br /> Ne vous découragez pas et essayez encore.')
             }
             _game.toggleModale(2, result);
+            $('.modale').addClass('small');
           }
           _game.putInMatrix(val,row,col);
           // NOTES ON
@@ -367,7 +368,7 @@ var Sudoku = ( function ( $ ){
       // var sectCol = Math.floor( col / 3 );
       return secIndex = ( row % 3 ) * 3 + ( col % 3 );
     },
-    toggleModale: function(display, message = '', prompt = false, callbackFn="") {
+    toggleModale: function(display, message = '', prompt = false, callbackFn = "") {
       //Code for DISPLAY
       // 0: fadeOut
       // 1: fadeIn
@@ -380,13 +381,6 @@ var Sudoku = ( function ( $ ){
 
       if(display === 1){
         $('body').append(modaleContent);
-        // $('.dialog-overlay').click(function(e){
-        //   e.preventDefault();
-        //   $(".modale").fadeOut(300);
-        //   $('.dialog-overlay').fadeOut(500, function () {
-        //       $(this).remove();
-        //     });
-        // })
         $(".modale .message").html(JSON.parse(message));
         $(".modale").fadeIn(300);
       } else if (display === 0){
@@ -1026,22 +1020,52 @@ $( document ).ready(function() {
   } );
   $( "#showSolution").click( function() {
     // game.showSolution();
-    var message = JSON.stringify("La solution va s'afficher. Êtes-vous sûr ?");
+    var message = JSON.stringify("La solution va s'afficher. Êtes-vous sûr de vouloir abandonner la partie ?");
     game.showModale(1, message, 1, 'showSolution');
+    $('.modale').addClass('small');
   } );
   $( "#restartGrid").click( function() {
-    var message = JSON.stringify('Vous êtes sur le point de réinitialiser la grille. Êtes-vous sûr ?');
+    var message = JSON.stringify('Vous êtes sur le point de réinitialiser la grille. Êtes-vous sûr de vouloir abandonner la partie ?');
     game.showModale(1, message, 1, 'restartGrid');
+    $('.modale').addClass('small');
   } );
   $( "#help").click( function() {
     var helpText = "<p class='big'>Comment jouer</p>"
-                + "Vous devez commencer par choisir un niveau de jeu. <span class='demo-levels e'></span> <span class='demo-levels m'></span> <span class='demo-levels h'></span><br />"
-                + "Le <span class='easy-color'>niveau facile</span> vous offre plus d'aides visuelles et indique les chiffres restants.<span class='demo-figure f1'>1</span> <br /><br />"
-                + "Pour remplir la grille, cliquez dans une case pour la sélectionner  et choisissez un chiffre.<br /><br />"
+                + "<div class='accordion'>"
+                + "<div class='demo-rules-specific demo-section'><a href=''>Pour démarrer</a></div>"
+                + "<div class='foldable'>"
+                + "<p>Vous devez commencer par choisir un niveau de jeu en cliquant sur NOUVELLE PARTIE. <span class='demo-levels e'></span> <span class='demo-levels m'></span> <span class='demo-levels h'></span></p>"
+                + "<p>Pour remplir la grille, cliquez dans une case pour la sélectionner puis choisissez un chiffre (les chiffres se trouvent sous la grille).</p>"
                 + "N'hésitez pas à vous servir de l'outil <span class='notes-color'>NOTES</span> (en-dessous des chiffres) qui vous permet de rajouter dans la grille des chiffres qui vous semblent probables."
-                + "<div class='wrap-center'><span class='demo-figure'>1</span> <span class='demo-figure'>2</span> <span class='demo-figure'>3</span> <span class='demo-figure'>4</span> <span class='demo-figure'>5</span> <span class='demo-figure'>6</span> <span class='demo-figure'>7</span> <span class='demo-figure'>8</span> <span class='demo-figure'>9</span></div><div class='demo-notes wrap-center'>NOTES<span  ></span></div>"
+                + "<div class='demo-notes wrap-center'>NOTES<span ></span></div>"
+                + "</div>"
+                + "<div class='demo-section'><a href=''>Différences entre les niveaux</a></div>"
+                + "<div class='foldable'>"
+                + "Le nombre de chiffres montrés au départ varie selon le niveau."
+                + "<p>Le <span class='easy-color'>niveau facile</span> vous offre davantage d'aides visuelles: par exemple, si le chiffre rajouté se trouve déjà dans la colonne, la rangée ou la section, la case est colorée en rouge. Par ailleurs, un indice au-dessus des chiffres vous indique les chiffres restants à placer dans la grille.<span class='demo-figure f1'>1</span>.</p>"
+                + "</div>"
+                + "<div class='demo-rules-title demo-section'><a href=''>Rappel - Règles du Sudoku</a></div>"
+                + "<div class='foldable demo-rules'>"
+                + "<p>Le sudoku classique contient neuf lignes et neuf colonnes, donc 81 cases au total.</p>"
+                + "<p>Le but du jeu est de remplir ces cases avec des chiffres allant de 1 à 9 en veillant toujours à ce qu'un même chiffre ne figure qu'une seule fois par colonne, une seule fois par ligne, et une seule fois par carré de neuf cases.</p>"
+                + "<p>Au début du jeu, quelques chiffres sont déjà placés et il vous reste à trouver les autres. Pour trouver les chiffres manquants, tout est une question de logique et d'observation.</p>"
+                + "</div>"
+                + "</div>"
     var message = JSON.stringify(helpText);
     game.showModale(1, message, 0);
+    var allPanels = $('.accordion  .foldable').hide();
+    $('.demo-section a').click(function() {
+      console.log("test",$(this))
+      if(!$(this).parent().hasClass("opened")) {
+        allPanels.slideUp();
+        $('.demo-section').removeClass('opened');
+        $(this).parent().next().slideDown().prev().addClass('opened');
+
+      } else {
+        $(this).parent().next().slideUp().prev().removeClass('opened');
+      }
+       return false;
+    });
   } );
   $( "#solve").click( function() {
     game.solve();
@@ -1052,14 +1076,18 @@ $( document ).ready(function() {
   $( "#reset").click( function() {
     game.reset();
   } );
+
   $("#create-easy").click( function() {
     game.createSudoku(0);
+    $('.level').removeClass("opened");
   } );
   $( "#create-medium").click( function() {
     game.createSudoku(1);
+    $('.level').removeClass("opened");
   } );
   $( "#create-hard").click( function() {
     game.createSudoku(2);
+    $('.level').removeClass("opened");
   } );
   $(".numbers").click( function(e) {
     var value = parseInt($(e.target).attr("id").slice(4));
@@ -1086,4 +1114,31 @@ $( document ).ready(function() {
     $('body').removeClass("asia");
     $('body').addClass("night");
   });
+  $("#new-game").hover(function(e) {
+    $('.level').addClass("opened");
+  });
+  document.querySelector('#new-game').addEventListener("touchstart", function(e) {
+    $('.level').addClass("opened");
+  }, false);
+  $("#new-game").click(function(e) {
+    // $('.level').removeClass('opened');
+  });
+  document.querySelector('#no-new-level').addEventListener("touchstart", function(e) {
+    $('.level').removeClass("opened");
+  }, false);
+  $("#no-new-level").click(function(e) {
+    console.log("click no-event")
+    $('.level').removeClass('opened');
+  });
+
+  $(".levels-options").mouseleave(function(e) {
+    //$('.level').removeClass('opened');
+  });
+  $(".options-game").mouseleave(function(e) {
+    $('.level').removeClass('opened');
+  });
+  $('.demo-rules-title').click(function(e){
+    $('.demo-rules').slideUp();
+  });
+
 });
