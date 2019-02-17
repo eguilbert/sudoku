@@ -20,13 +20,26 @@ $swatch_4: #28827b;
 $swatch_5: #3b5e5e;
 $swatch_6: #ab1c12;
 
-
-/* RGB */
-$color1: rgba(3, 57, 70, 1);
+$color1: rgba(230, 57, 70, 1);
 $color2: rgba(241, 250, 238, 1);
 $color3: rgba(168, 218, 220, 1);
 $color4: rgba(69, 123, 157, 1);
 $color5: rgba(29, 53, 87, 1);
+
+/* RGB */
+// $color1: rgba(239, 79, 47, 1);
+// $color2: rgba(222, 242, 223, 1);
+// $color3: rgba(162, 213, 232, 1);
+// $color4: rgba(64, 103, 170, 1);
+// $color5: rgba(25, 38, 99, 1);
+
+
+/* RGB */
+// $color1: rgba(3, 57, 70, 1);
+// $color2: rgba(241, 250, 238, 1);
+// $color3: rgba(168, 218, 220, 1);
+// $color4: rgba(69, 123, 157, 1);
+// $color5: rgba(29, 53, 87, 1);
 
 
 $blue: #4DAAE3;
@@ -59,7 +72,7 @@ $notes : #208116;
 // $hard : #f58a38;
 $help : #c9e0ec;
 // $help : #3b5e5e;
-$help : #227670;
+$help : rgba(69, 123, 157, 1);
 
 $color-indice: #227670;
 
@@ -122,7 +135,8 @@ body {
 		}
 		background: url("../img/flowers.jpg");
 		background: url("../img/sushi.png");
-		background: url("../img/unicorn_pink.png");
+		background: url("../img/licorne-pink.png");
+
 		// background: url("../img/kiwis.png");
 		// background: url("../img/wild-sea.png");
 		// background: url("../img/kitty.png");
@@ -159,9 +173,25 @@ body {
 			}
 		}
 	}
+	&.cul {
+		.wrap-container {
+			background: #ffffff99;
+			border-radius: 20px;
+		}
+		.levels {
+			background:none;
+			border: none;
+		}
+		background: url("../img/sex.png");
+		h1 {
+			text-shadow: 5px 5px pink;
+			
+		}
+	}
 	&.night {
 		.wrap-container {
-			background: #ffffff96;
+			background: #000;
+			
 			border-radius: 20px;
 			// box-shadow: 0 0 60px 30px #fff, 0 0 100px 60px #f0f, 0 0 140px 90px #0ff;
 			box-shadow: 0 0 41px 12px #fff, 0 0 48px 46px #f0f, 0 0 75px 53px #0ff;
@@ -170,6 +200,7 @@ body {
 		.levels {
 			background:none;
 			border: none;
+			color: #FFF;
 		}
 		background: url("../img/what-the-hex-dark.png");
 		h1 {
@@ -294,6 +325,9 @@ table {
 		&:hover {
 			box-shadow: #8d8d8e 3px 3px;
 		}
+	}
+	.close-layer {
+		display: none;
 	}
 	.big {
 		font-size: 1.3em;
@@ -481,10 +515,10 @@ table {
 	width: 300px;
 	margin: 1rem auto 0 auto;
 	button {
-		display: inline-block;
-		width: 80px;
-		height: 20px;
-		padding:0;
+		width: 20px;
+    height: 20px;
+    padding: 0;
+    border-radius: 20px;
 		&#mode-flowers {
 			background: url("../img/flowers.jpg");
 		}
@@ -493,6 +527,9 @@ table {
 		}
 		&#mode-night {
 			background: url("../img/what-the-hex-dark.png");
+		}
+		&#mode-cul {
+			background: pink;
 		}
 	}
 }
@@ -535,14 +572,13 @@ h1 {
 				outline: none;
 				background: $help;
 				border-radius: 40px;
+				transition: all 0.2s;
 				&:hover{
-					box-shadow: 0 0 0 3px #FFF,
-												0 0 0 4px #7bb0e3,
-												0 0 0 5px #FFF;
+					color: $help;
+					background: #FFF;
 				}
 				span {
 					opacity: 1;
-					transition: all 0.2s;
 					font-size: 0.7em;
 					display: block;
 					line-height: 1em;
@@ -729,15 +765,17 @@ h1 {
 			filter: grayscale(100%);
 			&:hover{
 				background: #8d8d8e;
+				&:before {
+					filter: invert(0);
+				}
 				span{
 					width: auto;
+					color: #FFF;
 				}
-				box-shadow: 0 0 0 3px #FFF,
-											0 0 0 4px #7bb0e3,
-											0 0 0 5px #FFF;
+				
 			}
 			&:before {
-				filter: invert(.7);
+				filter: invert(0.7);
 			}
 	}
 }
@@ -1200,15 +1238,17 @@ h1 {
 
 	}
 	.modale {
+		box-sizing: border-box;
 		.big {
 			margin: 1em;
 		}
 		&.small {
 			padding: 20px 30px 20px 20px;
+			
 		}
 		max-width: 100%;
 		transform: none;
-		top: -100px;
+		top: 0;
 		left: 0;
 		right: 0;
 		padding: 0;
@@ -1268,9 +1308,60 @@ h1 {
 		}
 	}
 }
+@media only screen and (max-width: 475px) {
+	.accordion {
+		font-size: 0.8em;
+	}
+	.sudoku-menu .levels .options-game {
+    display: flex;
+    vertical-align: middle;
+    height: 50px;
+}
+
+	.sudoku-menu .levels .options-game #help {
+    width: 29px;
+    height: 30px;
+		margin: auto;
+		&::before {
+			width: 10px;
+			left: 9px;
+			font-size: 1.5em;
+			top: 7px;
+		}
+	}
+
+	.modale {
+		.close-layer {
+			display: block;
+			position: fixed;
+			bottom: 0;
+			height: 100px;
+			text-align: center;
+			color: #fff;
+			background: #000;
+			width: 100%;
+			margin: auto;
+			vertical-align: middle;
+			padding: 20px;
+			box-sizing: border-box;
+		}
+		.close-btn {
+			display: none;
+		}
+		&.small{
+			position: relative;
+		}
+		.big {
+			margin: 0.5em;
+		}
+		margin: 0;
+		position: absolute;
+	}
+}
+
 @media only screen and (max-width: 400px) {
 	.wrap-container {
-		max-width: 100%;
+		max-width: 95%;
 	}
 
 	.sudoku-container {

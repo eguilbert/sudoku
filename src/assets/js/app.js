@@ -46,7 +46,8 @@ var Sudoku = ( function ( $ ){
     level,
     selectedCoord,
     notes = false,
-    started = false;
+    // started = false,
+    gridState = 'empty';
   /**
 	 * Initialize the singleton
 	 * @param {Object} config Configuration options
@@ -99,9 +100,10 @@ var Sudoku = ( function ( $ ){
         $( ".sudoku-container" ).toggleClass( "valid-matrix", isValid );
       },
       createSudoku: function(levelChosen) {
-          $(".numbers button span").fadeOut();
+        $(".numbers button span").fadeOut();
         CustomAnalytics.record("play");
-        started = true;
+        gridState = 'started';
+        // started = true;
         _game.toggleModale(0);
         $("#tools button").attr("disabled", false);
         _game.resetHideCases();
@@ -181,6 +183,7 @@ var Sudoku = ( function ( $ ){
       },
       // To MOVE into Game object
       fillCase: function(val){
+        console.log(gridState)
         var isValid = true,
           oldVal = $(selectedCase).html(),
           row = selectedCoord["row"],
@@ -188,65 +191,66 @@ var Sudoku = ( function ( $ ){
 
         // Display
         _game.showSelectedNumbersInGrid(val);
-
-        if(!notes){
-          // New val or same val? Impacts on
-          // console.log("_game.leftNumbers",_game.leftNumbers);
-
-          if(oldVal) {
-            if(oldVal!=val) {
-              _game.updateLeftNumbers(oldVal,"up");
-              if(val){_game.updateLeftNumbers(val,"down");}
-            }
-          } else {
-            _game.updateLeftNumbers(val,"down");
-          }
-          // console.log("left after choosing ", _game.leftNumbers)
-          selectedCase.html(val);
-          $(selectedCase).parent().find(".notes-grid span").removeClass("selectedNote");
-
-
-
-          if (_game.config.validate_on_insert) {
-            isValid = _game.validateNumber( val, row, col, _game.matrix.row[row][col] );
-            if(level !=="hard") {
-              // Indicate error
-              $( selectedCase ).toggleClass( "sudoku-input-error", !isValid );
-
-            }
-          }
-
-          // Check if grid full And Game Over;
-          for (var i = 1, sumCases=0; i < 10; i++) {
-            sumCases = sumCases + _game.leftNumbers[i]["left"];
-          }
-          if(sumCases == 0){
-            this.showSolution();
-            var result;
-            if(isValid){
-              result = JSON.stringify('<span class="big win">Bravo!</span><br /> On continue? Choisissez un niveau.')
+        if(gridState === 'started') {
+          if(!notes){
+            // New val or same val? Impacts on
+            // console.log("_game.leftNumbers",_game.leftNumbers);
+  
+            if(oldVal) {
+              if(oldVal!=val) {
+                _game.updateLeftNumbers(oldVal,"up");
+                if(val){_game.updateLeftNumbers(val,"down");}
+              }
             } else {
-              result = JSON.stringify('<span class="big fail">Dommage.</span><br /> Ne vous découragez pas et essayez encore.')
+              _game.updateLeftNumbers(val,"down");
             }
-            _game.toggleModale(2, result);
-            $('.modale').addClass('small');
+            // console.log("left after choosing ", _game.leftNumbers)
+            selectedCase.html(val);
+            $(selectedCase).parent().find(".notes-grid span").removeClass("selectedNote");
+  
+            if (_game.config.validate_on_insert) {
+              isValid = _game.validateNumber( val, row, col, _game.matrix.row[row][col] );
+              if(level !=="hard") {
+                // Indicate error
+                $( selectedCase ).toggleClass( "sudoku-input-error", !isValid );
+  
+              }
+            }
+  
+            // Check if grid full And Game Over;
+            for (var i = 1, sumCases=0; i < 10; i++) {
+              sumCases = sumCases + _game.leftNumbers[i]["left"];
+            }
+            if(sumCases == 0){
+              this.showSolution();
+              var result;
+              if(isValid){
+                result = JSON.stringify('<span class="big win">Bravo!</span><br /> On continue? Choisissez un niveau.')
+              } else {
+                result = JSON.stringify('<span class="big fail">Dommage.</span><br /> Ne vous découragez pas et essayez encore.')
+              }
+              _game.toggleModale(2, result);
+              $('.modale').addClass('small');
+            }
+            _game.putInMatrix(val,row,col);
+            // NOTES ON
+          } else {
+            $(selectedCase).removeClass("sudoku-input-error");
+            // Removing Case content
+            if(oldVal) {
+              $(selectedCase).html("");
+              _game.updateLeftNumbers(oldVal,"down");
+            }
+            // console.log("NOTES",selectedCase);
+            var notesDiv = $(selectedCase).parent().find(".notes-grid span:nth-child(" + val + ")");
+            // console.log("hasClass?",$(notesDiv).hasClass('selectedNote'))
+            if(val) {
+              $(notesDiv).hasClass("selectedNote")?$(notesDiv).removeClass("selectedNote"):$(notesDiv).addClass("selectedNote");
+            }
           }
-          _game.putInMatrix(val,row,col);
-          // NOTES ON
-        } else {
-          $(selectedCase).removeClass("sudoku-input-error");
-          // Removing Case content
-          if(oldVal) {
-            $(selectedCase).html("");
-            _game.updateLeftNumbers(oldVal,"down");
-          }
-          // console.log("NOTES",selectedCase);
-          var notesDiv = $(selectedCase).parent().find(".notes-grid span:nth-child(" + val + ")");
-          // console.log("hasClass?",$(notesDiv).hasClass('selectedNote'))
-          if(val) {
-            $(notesDiv).hasClass("selectedNote")?$(notesDiv).removeClass("selectedNote"):$(notesDiv).addClass("selectedNote");
-          }
+
         }
+        
       }
     };
   }
@@ -326,9 +330,9 @@ var Sudoku = ( function ( $ ){
     },
     // Restart same grid (and remove values entered)
     restartGrid: function(){
-      console.log("restartGrid")
-        this.resetGridStyles();
-        this.removeValues();
+      gridState = 'started';
+      this.resetGridStyles();
+      this.removeValues();
     },
 
     /**
@@ -337,15 +341,18 @@ var Sudoku = ( function ( $ ){
 		 * @param {jQuery.event} e Keyup event
 		 */
     onSelect: function( e ) {
-      if (started) {
+      console.log("GRIDSTATE", gridState)
+      if (gridState === 'started') {
+        console.log("GRIDSTATE nonetheless", gridState)
         var iseditable = $( e.currentTarget ).attr( "data-isEditable" );
         $(this.$cellMatrix[1]).addClass("selected");
         if(iseditable==="true") {
           // Reset the grid
+          console.log("iseditable", iseditable)
           this.endSelection();
           $( e.currentTarget ).addClass("selected");
           var row = $( e.currentTarget ).data( "row" ),
-              col = $( e.currentTarget ).data( "col" );
+          col = $( e.currentTarget ).data( "col" );
           selectedCase = $(e.currentTarget);
           selectedCoord = {row,col};
           var rowClass = $( e.currentTarget).attr("class").split(" ")[1];
@@ -477,7 +484,6 @@ var Sudoku = ( function ( $ ){
       $( "td" ).removeClass("showInGrid");
       $( "div" ).removeClass("showInGrid").removeClass("sudoku-input-error");
       $( "div span" ).removeClass("selectedNote");
-
     },
     resetLeftNumbers: function() {
       for (var i = 1; i < 10; i++) {
@@ -603,7 +609,7 @@ var Sudoku = ( function ( $ ){
     },
 
     showSolution: function(){
-      console.log("show solutio")
+
       this.resetGridStyles();
 
       // Replace elements on the Grid
@@ -629,6 +635,7 @@ var Sudoku = ( function ( $ ){
           }
         }, row * 50, row);
       }
+      gridState = 'resolved';
     },
     // DISPLAY fn
     updateDisplayLeftNumbers: function(){
@@ -1031,6 +1038,7 @@ $( document ).ready(function() {
   } );
   $( "#help").click( function() {
     var helpText = "<p class='big'>Comment jouer</p>"
+                
                 + "<div class='accordion'>"
                 + "<div class='demo-rules-specific demo-section'><a href=''>Pour démarrer</a></div>"
                 + "<div class='foldable'>"
@@ -1051,9 +1059,17 @@ $( document ).ready(function() {
                 + "<p>Au début du jeu, quelques chiffres sont déjà placés et il vous reste à trouver les autres. Pour trouver les chiffres manquants, tout est une question de logique et d'observation.</p>"
                 + "</div>"
                 + "</div>"
+                + "<div class='close-layer'>Fermer la fenêtre</div>"
+                
     var message = JSON.stringify(helpText);
     game.showModale(1, message, 0);
     var allPanels = $('.accordion  .foldable').hide();
+    $('.close-layer').click(function(e){
+      $(".modale").fadeOut(300);
+      $('.dialog-overlay').fadeOut(500, function () {
+          $(this).remove();
+        });
+    });
     $('.demo-section a').click(function() {
       console.log("test",$(this))
       if(!$(this).parent().hasClass("opened")) {
@@ -1100,20 +1116,34 @@ $( document ).ready(function() {
     $(this).is(":checked")? game.toggleNotes(1):game.toggleNotes(0);
   });
   $("#mode-flowers").click(function(e) {
+    $('h1').text('Sudoku');
     $('body').removeClass("asia");
     $('body').removeClass("night");
+    $('body').removeClass("cul");
     $('body').addClass("flowers");
   });
   $("#mode-asia").click(function(e) {
+    $('h1').text('Sudoku');
     $('body').removeClass("flowers");
     $('body').removeClass("night");
+    $('body').removeClass("cul");
     $('body').addClass("asia");
   });
   $("#mode-night").click(function(e) {
+    $('h1').text('Sudoku');
     $('body').removeClass("flowers");
     $('body').removeClass("asia");
+    $('body').removeClass("cul");
     $('body').addClass("night");
   });
+  $("#mode-cul").click(function(e) {
+    $('h1').text('Sudocul');
+    $('body').removeClass("flowers");
+    $('body').removeClass("asia");
+    $('body').removeClass("night");
+    $('body').addClass("cul");
+  });
+  
   $("#new-game").hover(function(e) {
     $('.level').addClass("opened");
   });
@@ -1130,7 +1160,6 @@ $( document ).ready(function() {
     console.log("click no-event")
     $('.level').removeClass('opened');
   });
-
   $(".levels-options").mouseleave(function(e) {
     //$('.level').removeClass('opened');
   });
