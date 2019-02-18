@@ -73,21 +73,12 @@ $help : rgba(69, 123, 157, 1);
 
 $color-indice: #227670;
 
-.easy-color {
-	color: $easy;
-}
-.notes-color {
-	color: $notes;
-}
-
-
 .wrap-container {
 	width: 575px;
 	margin: auto;
 	margin-bottom: 60px;
 	padding: 10px 0 10px 10px;
 }
-
 
 /* LOADER */
 .no-js #loader { display: none;  }
@@ -101,7 +92,6 @@ $color-indice: #227670;
 	z-index: 9999;
 	background: url(../img/Preloader_3.gif) center no-repeat #fff;
 }
-
 
 *{
 	-webkit-touch-callout: none; /* iOS Safari */
@@ -125,19 +115,8 @@ body {
 			border:none;
 		}
 		background: url("../img/flowers.jpg");
-		// background: url("../img/sushi.png");
-		// background: url("../img/licorne-pink.png");
-
-		// background: url("../img/kiwis.png");
-
-		// background: url("../img/kitty.png");
-		// background: url("../img/canvas-orange.jpg");
 		h1 {
-			// text-shadow: 0 0 6px #e25458, 0 0 12px #53c6c7;
-			// color: #f5dc19;
 			color: #bc2e1e;
-			// background: #edde9c;
-			// text-shadow: 0 1px 0px #378ab4, 1px 0 0px #5dabcd, 1px 2px 1px #378ab4, 2px 1px 1px #5dabcd, 2px 3px 2px #378ab4, 3px 2px 2px #5dabcd, 3px 4px 2px #378ab4, 4px 3px 3px #5dabcd, 4px 5px 3px #378ab4, 5px 4px 2px #5dabcd, 5px 6px 2px #378ab4, 6px 5px 2px #5dabcd, 6px 7px 1px #378ab4, 7px 6px 1px #5dabcd, 7px 8px 0px #378ab4, 8px 7px 0px #5dabcd;
 		}
 		.sudoku-menu {
 			&.levels {
@@ -175,19 +154,9 @@ body {
 		}
 		background: url("../img/sex.png");
 		h1 {
-			// display: inline;
-	    // position: relative;
 	    letter-spacing: -5px;
 	    color: rgba(0,0,255,0.5);
-			// text-shadow: 5px 5px pink;
 			text-shadow: 0 1px 0px pink, 1px 0 0px pink, 1px 2px 1px pink, 2px 1px 1px pink, 2px 3px 2px pink, 3px 2px 2px pink, 3px 4px 2px pink, 4px 3px 3px pink, 4px 5px 3px pink;
-			// &:after {
-			// 	content: "SudoCul";
-			// 		position: absolute;
-			// 		left: 10px;
-			// 		top: 5px;
-			// 		color: rgba(255,0,0,0.5);
-			// }
 		}
 	}
 	&.sushi {
@@ -313,22 +282,15 @@ table {
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.50);
 		z-index: 999999;
-		// margin-bottom: -200px;
-    overflow: hidden;
-}
-
-.dialog-overlay {
-	display: flex;
+		overflow: hidden;
+		display: flex;
     justify-content: center;
     align-items: center;
 		position: fixed;
 		margin-bottom: 0px;
 }
+
 .modale {
-	// position: absolute;
-	// top:40%;
-	// left:50%;
-	// transform: translate(-50%, -50%);
 	position: relative;
 	z-index:10;
 	background:#FFF;
@@ -681,24 +643,6 @@ h1 {
 			text-transform: uppercase;
 		}
 	}
-}
-@keyframes rolldown {
-  0% {
-    visibility: visible;
-    transform: rotateX(180deg) perspective(500px);
-    // transform: translateX(500px);
-
-  }
-  70% {
-    visibility: visible;
-    transform: rotateX(-20deg);
-		// transform: translateX(700px);
-  }
-  100% {
-    visibility: visible;
-    transform: rotateX(0deg);
-		// transform: translateX(800px);
-  }
 }
 
 .flat {
@@ -1361,20 +1305,29 @@ h1 {
 			top: 7px;
 		}
 	}
-
+	.flat .numbers button {
+		border: none;
+		box-shadow: none;
+		&:hover {
+			box-shadow: none;
+			color: $selection-color;
+			background: #FFF;
+			z-index: 1;
+		}
+	}
 	.modale {
 		.close-layer {
 			display: block;
 			position: fixed;
 			bottom: 0;
-			height: 100px;
+			height: 140px;
 			text-align: center;
 			color: #fff;
 			background: #000;
 			width: 100%;
 			margin: auto;
-			vertical-align: middle;
-			padding: 20px;
+			vertical-align: top;
+			padding: 10px 20px 20px 20px;
 			box-sizing: border-box;
 		}
 		.close-btn {
@@ -1442,5 +1395,9 @@ h1 {
 			width: 30px;
 			height: 30px;
 		}
+	}
+	.sudoku-container .cell {
+    font-size: 1.3em;
+    line-height: 1.5em;
 	}
 }
