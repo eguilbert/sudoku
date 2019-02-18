@@ -44,7 +44,6 @@ $color5: rgba(29, 53, 87, 1);
 
 $blue: #4DAAE3;
 $red: #ab1c12;
-
 $dark : #212121;
 
 $general-background: #FFF;
@@ -67,10 +66,8 @@ $easy : #0FB900;
 $medium : #107db0	;
 $hard : #f58a38;
 $notes : #208116;
-// $easy : #42b0e3;
-// $medium : #fce374;
-// $hard : #f58a38;
-$help : #c9e0ec;
+
+// $help : #c9e0ec;
 // $help : #3b5e5e;
 $help : rgba(69, 123, 157, 1);
 
@@ -83,10 +80,6 @@ $color-indice: #227670;
 	color: $notes;
 }
 
-// // THEMES
-// flowers
-// asia
-// flat
 
 .wrap-container {
 	width: 575px;
@@ -96,9 +89,7 @@ $color-indice: #227670;
 }
 
 
-/* Paste this css to your style sheet file or under head tag */
-/* This only works with JavaScript,
-if it's not present, don't show loader */
+/* LOADER */
 .no-js #loader { display: none;  }
 .js #loader { display: block; position: absolute; left: 100px; top: 0; }
 .se-pre-con {
@@ -134,11 +125,11 @@ body {
 			border:none;
 		}
 		background: url("../img/flowers.jpg");
-		background: url("../img/sushi.png");
-		background: url("../img/licorne-pink.png");
+		// background: url("../img/sushi.png");
+		// background: url("../img/licorne-pink.png");
 
 		// background: url("../img/kiwis.png");
-		// background: url("../img/wild-sea.png");
+
 		// background: url("../img/kitty.png");
 		// background: url("../img/canvas-orange.jpg");
 		h1 {
@@ -146,7 +137,7 @@ body {
 			// color: #f5dc19;
 			color: #bc2e1e;
 			// background: #edde9c;
-			text-shadow: 0 1px 0px #378ab4, 1px 0 0px #5dabcd, 1px 2px 1px #378ab4, 2px 1px 1px #5dabcd, 2px 3px 2px #378ab4, 3px 2px 2px #5dabcd, 3px 4px 2px #378ab4, 4px 3px 3px #5dabcd, 4px 5px 3px #378ab4, 5px 4px 2px #5dabcd, 5px 6px 2px #378ab4, 6px 5px 2px #5dabcd, 6px 7px 1px #378ab4, 7px 6px 1px #5dabcd, 7px 8px 0px #378ab4, 8px 7px 0px #5dabcd;
+			// text-shadow: 0 1px 0px #378ab4, 1px 0 0px #5dabcd, 1px 2px 1px #378ab4, 2px 1px 1px #5dabcd, 2px 3px 2px #378ab4, 3px 2px 2px #5dabcd, 3px 4px 2px #378ab4, 4px 3px 3px #5dabcd, 4px 5px 3px #378ab4, 5px 4px 2px #5dabcd, 5px 6px 2px #378ab4, 6px 5px 2px #5dabcd, 6px 7px 1px #378ab4, 7px 6px 1px #5dabcd, 7px 8px 0px #378ab4, 8px 7px 0px #5dabcd;
 		}
 		.sudoku-menu {
 			&.levels {
@@ -184,18 +175,72 @@ body {
 		}
 		background: url("../img/sex.png");
 		h1 {
+			// display: inline;
+	    // position: relative;
+	    letter-spacing: -5px;
+	    color: rgba(0,0,255,0.5);
+			// text-shadow: 5px 5px pink;
+			text-shadow: 0 1px 0px pink, 1px 0 0px pink, 1px 2px 1px pink, 2px 1px 1px pink, 2px 3px 2px pink, 3px 2px 2px pink, 3px 4px 2px pink, 4px 3px 3px pink, 4px 5px 3px pink;
+			// &:after {
+			// 	content: "SudoCul";
+			// 		position: absolute;
+			// 		left: 10px;
+			// 		top: 5px;
+			// 		color: rgba(255,0,0,0.5);
+			// }
+		}
+	}
+	&.sushi {
+		.wrap-container {
+			background: #ffffff99;
+			border-radius: 20px;
+		}
+		.levels {
+			background:none;
+			border: none;
+		}
+		background: url("../img/sushi.png");
+		h1 {
+			color: #FFF;
+			text-shadow: 0 1px 0px #ef7655, 1px 0 0px #ef7655, 1px 2px 1px #ef7655, 2px 1px 1px #ef7655, 2px 3px 2px #ef7655, 3px 2px 2px #ef7655, 3px 4px 2px #ef7655, 4px 3px 3px #ef7655, 4px 5px 3px #ef7655;
+		}
+	}
+	&.licorne {
+		.wrap-container {
+			background: #ffffff99;
+			border-radius: 20px;
+		}
+		.levels {
+			background:none;
+			border: none;
+		}
+		background: url("../img/licorne-pink.png");
+		h1 {
 			text-shadow: 5px 5px pink;
-			
+			text-shadow: 0 1px 0px pink, 1px 0 0px pink, 1px 2px 1px pink, 2px 1px 1px pink, 2px 3px 2px pink, 3px 2px 2px pink, 3px 4px 2px pink, 4px 3px 3px pink, 4px 5px 3px pink;
+		}
+	}
+	&.cat {
+		.wrap-container {
+			background: #ffffff99;
+			border-radius: 20px;
+		}
+		.levels {
+			background:none;
+			border: none;
+		}
+		background: url("../img/kitty.png");
+		h1 {
+			text-shadow: 5px 5px pink;
+			text-shadow: 0 1px 0px pink, 1px 0 0px pink, 1px 2px 1px pink, 2px 1px 1px pink, 2px 3px 2px pink, 3px 2px 2px pink, 3px 4px 2px pink, 4px 3px 3px pink, 4px 5px 3px pink;
 		}
 	}
 	&.night {
 		.wrap-container {
 			background: #000;
-			
 			border-radius: 20px;
 			// box-shadow: 0 0 60px 30px #fff, 0 0 100px 60px #f0f, 0 0 140px 90px #0ff;
 			box-shadow: 0 0 41px 12px #fff, 0 0 48px 46px #f0f, 0 0 75px 53px #0ff;
-
 		}
 		.levels {
 			background:none;
@@ -204,47 +249,26 @@ body {
 		}
 		background: url("../img/what-the-hex-dark.png");
 		h1 {
-			// color: #ccff00;
-			// text-shadow: 1px 1px 2px #ffffff91, 0 0 25px #e4ff00, 0 0 5px #69ff57;
-			// display: inline-block;
-		// -webkit-box-sizing: border-box;
-		// -moz-box-sizing: border-box;
-		// box-sizing: border-box;
-		// float: none;
-		// z-index: auto;
-		// width: auto;
-		// height: auto;
-		// position: static;
-		// cursor: default;
-		// opacity: 1;
-
-		// spadding: 10px;
-		// overflow: visible;
-		// border: none;
-		// -webkit-border-radius: 0;
-		// border-radius: 0;
-		// font: normal 48px/normal "Warnes", Helvetica, sans-serif;
-		color: rgba(255,255,255,1);
-		// text-decoration: normal;
-		text-align: center;
-		-o-text-overflow: clip;
-		text-overflow: clip;
-		white-space: pre;
-		background: none;
-		-webkit-box-shadow: none;
-		box-shadow: none;
-		text-shadow: 0 0 10px rgba(255,255,255,1) , 0 0 20px rgba(255,255,255,1) , 0 0 30px rgba(255,255,255,1) , 0 0 40px #ff00de , 0 0 70px #ff00de , 0 0 80px #ff00de , 0 0 100px #ff00de ;
-		-webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
-		-moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
-		-o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
-		transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
-		-webkit-transform: none;
-		transform: none;
-		-webkit-transform-origin: 50% 50% 0;
-		transform-origin: 50% 50% 0;
-		&:hover {
-			text-shadow: 0 0 10px rgba(255,255,255,1) , 0 0 20px rgba(255,255,255,1) , 0 0 30px rgba(255,255,255,1) , 0 0 40px #00ffff , 0 0 70px #00ffff , 0 0 80px #00ffff , 0 0 100px #00ffff ;
-		}
+			color: rgba(255,255,255,1);
+			text-align: center;
+			-o-text-overflow: clip;
+			text-overflow: clip;
+			white-space: pre;
+			background: none;
+			-webkit-box-shadow: none;
+			box-shadow: none;
+			text-shadow: 0 0 10px rgba(255,255,255,1) , 0 0 20px rgba(255,255,255,1) , 0 0 30px rgba(255,255,255,1) , 0 0 40px #ff00de , 0 0 70px #ff00de , 0 0 80px #ff00de , 0 0 100px #ff00de ;
+			-webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+			-moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+			-o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+			transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+			-webkit-transform: none;
+			transform: none;
+			-webkit-transform-origin: 50% 50% 0;
+			transform-origin: 50% 50% 0;
+			&:hover {
+				text-shadow: 0 0 10px rgba(255,255,255,1) , 0 0 20px rgba(255,255,255,1) , 0 0 30px rgba(255,255,255,1) , 0 0 40px #00ffff , 0 0 70px #00ffff , 0 0 80px #00ffff , 0 0 100px #00ffff ;
+			}
 		}
 		#showSolution:not(disabled), #restartGrid {
 			background: #040404;
@@ -257,7 +281,6 @@ body {
 		.numbers button {
 			filter: saturate(3);
 		}
-
 	}
 	margin: 0;
 	padding: 0;
@@ -531,6 +554,15 @@ table {
 		&#mode-cul {
 			background: pink;
 		}
+		&#mode-sushi {
+			background: url("../img/sushi.png");
+		}
+		&#mode-licorne {
+			background: url("../img/licorne-pink.png");
+		}
+		&#mode-cat {
+			background: url("../img/kitty.png");
+		}
 	}
 }
 
@@ -772,7 +804,7 @@ h1 {
 					width: auto;
 					color: #FFF;
 				}
-				
+
 			}
 			&:before {
 				filter: invert(0.7);
@@ -1244,7 +1276,7 @@ h1 {
 		}
 		&.small {
 			padding: 20px 30px 20px 20px;
-			
+
 		}
 		max-width: 100%;
 		transform: none;

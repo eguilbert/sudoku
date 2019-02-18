@@ -195,7 +195,7 @@ var Sudoku = ( function ( $ ){
           if(!notes){
             // New val or same val? Impacts on
             // console.log("_game.leftNumbers",_game.leftNumbers);
-  
+
             if(oldVal) {
               if(oldVal!=val) {
                 _game.updateLeftNumbers(oldVal,"up");
@@ -207,16 +207,16 @@ var Sudoku = ( function ( $ ){
             // console.log("left after choosing ", _game.leftNumbers)
             selectedCase.html(val);
             $(selectedCase).parent().find(".notes-grid span").removeClass("selectedNote");
-  
+
             if (_game.config.validate_on_insert) {
               isValid = _game.validateNumber( val, row, col, _game.matrix.row[row][col] );
               if(level !=="hard") {
                 // Indicate error
                 $( selectedCase ).toggleClass( "sudoku-input-error", !isValid );
-  
+
               }
             }
-  
+
             // Check if grid full And Game Over;
             for (var i = 1, sumCases=0; i < 10; i++) {
               sumCases = sumCases + _game.leftNumbers[i]["left"];
@@ -250,7 +250,7 @@ var Sudoku = ( function ( $ ){
           }
 
         }
-        
+
       }
     };
   }
@@ -1038,7 +1038,7 @@ $( document ).ready(function() {
   } );
   $( "#help").click( function() {
     var helpText = "<p class='big'>Comment jouer</p>"
-                
+
                 + "<div class='accordion'>"
                 + "<div class='demo-rules-specific demo-section'><a href=''>Pour démarrer</a></div>"
                 + "<div class='foldable'>"
@@ -1060,7 +1060,7 @@ $( document ).ready(function() {
                 + "</div>"
                 + "</div>"
                 + "<div class='close-layer'>Fermer la fenêtre</div>"
-                
+
     var message = JSON.stringify(helpText);
     game.showModale(1, message, 0);
     var allPanels = $('.accordion  .foldable').hide();
@@ -1120,6 +1120,10 @@ $( document ).ready(function() {
     $('body').removeClass("asia");
     $('body').removeClass("night");
     $('body').removeClass("cul");
+    $('body').removeClass("sushi");
+    $('body').removeClass("licorne");
+    $('body').removeClass("cat");
+
     $('body').addClass("flowers");
   });
   $("#mode-asia").click(function(e) {
@@ -1127,6 +1131,9 @@ $( document ).ready(function() {
     $('body').removeClass("flowers");
     $('body').removeClass("night");
     $('body').removeClass("cul");
+    $('body').removeClass("sushi");
+    $('body').removeClass("licorne");
+    $('body').removeClass("cat");
     $('body').addClass("asia");
   });
   $("#mode-night").click(function(e) {
@@ -1134,16 +1141,52 @@ $( document ).ready(function() {
     $('body').removeClass("flowers");
     $('body').removeClass("asia");
     $('body').removeClass("cul");
+    $('body').removeClass("sushi");
+    $('body').removeClass("licorne");
+    $('body').removeClass("cat");
     $('body').addClass("night");
   });
   $("#mode-cul").click(function(e) {
-    $('h1').text('Sudocul');
+    $('h1').text('SudoCul');
     $('body').removeClass("flowers");
     $('body').removeClass("asia");
     $('body').removeClass("night");
+    $('body').removeClass("sushi");
+    $('body').removeClass("licorne");
+    $('body').removeClass("cat");
     $('body').addClass("cul");
   });
-  
+  $("#mode-cat").click(function(e) {
+    $('h1').text('SudoCat');
+    $('body').removeClass("flowers");
+    $('body').removeClass("asia");
+    $('body').removeClass("night");
+    $('body').removeClass("cul");
+    $('body').removeClass("licorne");
+    $('body').removeClass("sushi");
+    $('body').addClass("cat");
+  });
+  $("#mode-licorne").click(function(e) {
+    $('h1').text('Sudocorne');
+    $('body').removeClass("flowers");
+    $('body').removeClass("asia");
+    $('body').removeClass("night");
+    $('body').removeClass("cul");
+    $('body').removeClass("cat");
+    $('body').removeClass("sushi");
+    $('body').addClass("licorne");
+  });
+  $("#mode-sushi").click(function(e) {
+    $('h1').text('Sushiku');
+    $('body').removeClass("flowers");
+    $('body').removeClass("asia");
+    $('body').removeClass("night");
+    $('body').removeClass("cul");
+    $('body').removeClass("cat");
+    $('body').removeClass("licorne");
+    $('body').addClass("sushi");
+  });
+
   $("#new-game").hover(function(e) {
     $('.level').addClass("opened");
   });
