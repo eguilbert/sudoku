@@ -539,7 +539,6 @@ h1 {
   font-weight: normal;
 	font-size: 3em;
 	margin-bottom: 20px;
-	// font-family: 'Lato', Arial, sans-serif;
 }
 .sudoku-menu {
 	width: 100%;
@@ -549,12 +548,10 @@ h1 {
 	margin-bottom: 10px;
 	.levels {
 		position: relative;
-		// border: 1px solid #f186306b;
 		padding: 5px 10px 10px 10px;
 		border-radius: 10px;
 		width: 550px;
 		margin: auto;
-		// background: #fff9;
 		height: 80px;
 		.options-game {
 			position: relative;
@@ -647,7 +644,6 @@ h1 {
 
 .flat {
 	.sudoku-menu{
-
 		button {
 			box-shadow: none;
 			font-size: 1em;
@@ -657,8 +653,6 @@ h1 {
 			text-shadow:none;
 			padding: .5em 1.5em;
 			line-height: 1.5em;
-
-
 			&.easy {
 				background-color: #0FB900;
 				color: white;
@@ -730,31 +724,28 @@ h1 {
 }
 
 
-
-
-.flat {
-		#showSolution, #restartGrid {
-			box-shadow: none;
-			background: #8d8d8e40;
-			transition: all .2s;
-			color:#313131;
-			filter: grayscale(100%);
-			&:hover{
-				background: #8d8d8e;
-				&:before {
-					filter: invert(0);
-				}
-				span{
-					width: auto;
-					color: #FFF;
-				}
-
-			}
+	#showSolution, #restartGrid {
+		box-shadow: none;
+		background: #8d8d8e40;
+		transition: all .2s;
+		color:#313131;
+		filter: grayscale(100%);
+		&:hover{
+			background: #8d8d8e;
 			&:before {
-				filter: invert(0.7);
+				filter: invert(0);
 			}
-	}
+			span{
+				width: auto;
+				color: #FFF;
+			}
+
+		}
+		&:before {
+			filter: invert(0.7);
+		}
 }
+
 
 #showSolution {
 	&::before {
@@ -895,9 +886,7 @@ h1 {
 	background: $red!important;
 	color: #FFF;
 }
-.sudoku-container.valid-matrix {
-	// border: 5px solid $valid-matrix;
-}
+
 
 .sudoku-section-one, .sudoku-section-two {
 	position: relative;
