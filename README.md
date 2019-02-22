@@ -60,4 +60,4 @@ npm run fix
 
 > À noter : si vous ajoutez des librairies, elles seront également lintées. Si ce n'est pas ce que vous souhaitez, mettez-les dans le dossier `vendor`.
 
-[![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=zWSuBX4PAYj7tdzcRREF)](https://www.browserstack.com/automate/public-build/zWSuBX4PAYj7tdzcRREF)
+[![BrowserStack Status](https://automate.browserstack.com/automate/badge.svg?badge_key=zWSuBX4PAYj7tdzcRREF)](https://www.browserstack.com/automate/public-build/zWSuBX4PAYj7tdzcRREF)
