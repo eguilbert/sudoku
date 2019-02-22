@@ -60,7 +60,7 @@ npm run fix
 
 > À noter : si vous ajoutez des librairies, elles seront également lintées. Si ce n'est pas ce que vous souhaitez, mettez-les dans le dossier `vendor`.
 
-Testing done with Browserstack
+Testing done with
 [Browserstack](https://www.browserstack.com/)
 
 ![Browserstack](https://p14.zdusercontent.com/attachment/1015988/eKpVMJ4TYZOO5PuHEtZdvm3nw?token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..Ig6HC3ySEkCv3VJMH6WL5g.vgdMvEacPKtMdeAosYcP1AlkH4N2ae0bzsC_arKLLn838_bt9JcOZjeV6nSF_5R6RzuwSjJcR0KlhSIaCUefMn7FFwcm-OrG370iHtw_WR8SVhlq33R7UkH5iDXXrefrMs_EcZqiB5hiPTmEnV4pzFBXdpQZ9Bh1EcvUsY3BB6JjfKeDGe-pX_pWdzRsN9059ZPCKWg4Swpv-3jeQfeWWODjQn_JumgCf1CRWoIXYnHtzlT621Dg0LMhTnnLiZpQJVuxGjH4nMOMmBv36ecXbA.cX2ZR0V2M1ugvNapeWPVNg "Logo Browserstack")
